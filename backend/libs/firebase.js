@@ -1,11 +1,13 @@
-const admin = require('firebase-admin');
-
-const serviceAccount = require('./files/serviceAccountKey.json');
+const firebase = require('firebase');
 
 const config = {
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://hacktps-2bc24.firebaseio.com"
+    apiKey: "AIzaSyDWTeVZ1QRE5BeEQ8yjiu_LNtzon9BoA1g",
+    authDomain: "hacktps-2bc24.firebaseapp.com",
+    databaseURL: "https://hacktps-2bc24.firebaseio.com",
+    projectId: "hacktps-2bc24",
+    storageBucket: "hacktps-2bc24.appspot.com",
+    messagingSenderId: "357270015514"
 };
-admin.initializeApp(config);
+firebase.initializeApp(config);
 
-module.exports = admin;
+module.exports = firebase;
