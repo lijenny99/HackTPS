@@ -2,7 +2,6 @@ import React from 'react';
 import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, Image, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
 import Message from './Message';
-import BackButton from './BackButton';
 import openSocket from 'socket.io-client';
 
 const socket = openSocket('https://bravetheheat.herokuapp.com/');
