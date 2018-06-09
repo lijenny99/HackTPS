@@ -2,6 +2,9 @@ import React from 'react';
 import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
 import Message from './Message';
+import openSocket from 'socket.io-client';
+
+const socket = openSocket('https://bravetheheat.herokuapp.com/');
 
 export default class Messaging extends React.Component {
     state = {
@@ -50,15 +53,6 @@ export default class Messaging extends React.Component {
     render() {
         return (
             <ImageBackground style={styles.container} source={require('../assets/background-white.jpg')}>
-            <ScrollView>
-            <DisplayPic />
-            <GreyBox />
-            <BlueBox />
-            <BlueBox />
-            <BlueBox />
-            <BlueBox />
-            <BlueBox />
-            <BlueBox />
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} />
                     <TouchableHighlight style={styles.button} onPress={this.handleSend}>
@@ -68,7 +62,6 @@ export default class Messaging extends React.Component {
                 {this.state.messages.map(message => {
                     return <Message text={message.text} key={message.id}/>
                 })}
-                </ScrollView>
             </ImageBackground>
         )
     }
