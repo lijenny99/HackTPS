@@ -1,19 +1,8 @@
-const io = require('socket.io')({
-    path: '/api',
-    serveClient: false
-});
 const cors = require("cors");
-const server = require("http").createServer();
 const crypto = require("crypto");
-
 let local_cache = {}; // For sessions
+const io = require("./express");
 
-
-io.attach(server, {
-
-});
-
-server.listen(3000, () => console.log(`Socket opened at 3000`));
 
 io.on("connection", socket => {
     let client_id = socket.id;
