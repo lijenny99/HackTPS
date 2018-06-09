@@ -34,7 +34,6 @@ class HomeScreen extends React.Component {
       username: this.state.username, 
       password: this.state.password
     }
-
     
     auth.signInWithEmailAndPassword(this.state.username, this.state.password)
         .then(() => {

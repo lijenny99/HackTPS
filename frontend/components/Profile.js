@@ -79,7 +79,7 @@ export default class Profile extends React.Component {
             )
         } else if (this.state.page === 'sketch') {
             return (
-                <Sketch goBack={this.goBack} />
+                <Sketch goBack={this.goBack} navigation={this.props.navigation}/>
             )
         }
         
