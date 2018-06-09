@@ -89,7 +89,7 @@ io.on("connect", socket => {
 
     })
 
-    socket.on("disconnect", () => console.log(`${session_id} disconnected`));
+    socket.on("disconnect", () => console.log(`${client_id} disconnected`));
 });
 
 function gen_session() {
