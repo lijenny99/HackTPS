@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
+import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, Image, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
 import Message from './Message';
 import BackButton from './BackButton';
@@ -36,6 +36,10 @@ export default class Messaging extends React.Component {
         })
     }
 
+    handleBack = () => {
+        this.props.navigation.goBack();
+    }
+
     handleSend = () => {
         let data = {
             user_id: this.state.user,
@@ -56,7 +60,9 @@ export default class Messaging extends React.Component {
             <ScrollView>
 
             <View style={styles.container}>
-            <BackButton style={{marginTop: '10%', marginBottom: '10%'}} goBack={this.handleBack}/>
+            <TouchableHighlight onPress={this.handleBack} >
+                <Image style={styles.img} source={require('../assets/back-arrow.png')} style={{resizeMode: 'contain', alignSelf:'flex-end', width: 100}}/>
+            </TouchableHighlight>
 
 
             <DisplayPic />
