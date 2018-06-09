@@ -17,18 +17,23 @@ io.on("connection", socket => {
     let client_id = socket.id;
     console.log(`New client connected with session ID ${session_id}`);
 
-    socket.on("create_room", (data) => {
+    socket.on("create_session", (data) => {
         let time_stamp = Date.now();
         session_id = gen_session();
         let info = {
-            user_id: data._id,
+            client_id: client_id,
+            user_id: data.user_id,
             time_stamp: time_stamp,
-            session_id: session_id
+            session_id: session_id,
+            category: data.category
         }
         socket.join(session_id, () => {
             console.log(`Room with session id ${session_id} with client ${client_id} created`);
-            socket.to(client_id).emit('response', {
-                response: "Room created",
+            socket.to(client_id).emit('session_created', {
+                status: true,
+                client_id: client_id,
+                user_id: data.user_id,
+                time_stamp: time_stamp,
                 session_id: session_id
             })
         })
@@ -78,7 +83,7 @@ io.on("connection", socket => {
             client_id: client_id,
             session_id: session_id,
             time_stamp: time_stamp,
-            user_id: data._id,
+            user_id: data.user_id,
             message: data.message
         }
         // Maybe get info from database regarding user?
