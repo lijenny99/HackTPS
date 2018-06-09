@@ -36,7 +36,7 @@ io.on("connect", socket => {
                 session_id: session_id,
                 category: data.category
             }
-            db.createSession(info);
+            //db.createSession(info);
         })
 
 
@@ -92,7 +92,7 @@ io.on("connect", socket => {
         socket.broadcast.to(session_id, message);
         // Put info in database
 
-        db.addMessage(message);
+        //db.addMessage(message);
 
 
     })
