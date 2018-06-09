@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput} from 'react-native';
 import DisplayPic from './DisplayPic';
+import Message from './Message';
 
 export default class Messaging extends React.Component {
     state = {
@@ -8,7 +9,7 @@ export default class Messaging extends React.Component {
         client: '',
         session: '',
         message: '',
-        messages: ['this is a test', 'hello there', 'goodbye there']
+        messages: [{text: 'hello', id: 12412512}, {text: 'hello', id: 12125125125125}, {text: 'hello', id: 124125121212412}]
     }
 
 
@@ -29,7 +30,7 @@ export default class Messaging extends React.Component {
             user: user1,
             client: client1,
             session: session1,
-            message: e.nativeEvent.text
+            message: {text: e.nativeEvent.text, id: new Date().getSeconds().toString()}
         })
     }
 
@@ -57,7 +58,7 @@ export default class Messaging extends React.Component {
                     </TouchableHighlight>
                 </View>
                 {this.state.messages.map(message => {
-                    return <Message text={this.state.message} />
+                    return <Message text={message.text} key={message.id}/>
                 })}
             </ImageBackground>
         )
