@@ -20,7 +20,7 @@ export default class Profile extends React.Component {
     componentDidMount() {
         const userID = this.props.navigation.getParam('userID', 'NONE');
         const clientID = this.props.navigation.getParam('clientID', 'NONE');
-        console.log(userID + '--------' + clientID);
+        
         this.setState({userID: userID, clientID: clientID});
     }
 
@@ -31,10 +31,8 @@ export default class Profile extends React.Component {
     };
 
     handleContact = () => {
-        console.log('handling contact...');
         socket.on("session_created", (data) => {
             this.setState({sessionID: data.session_id});
-            console.log(this.state);
         });
         socket.emit("create_session", {
             user_id: this.state.userID,

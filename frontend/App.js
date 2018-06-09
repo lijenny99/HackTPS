@@ -58,7 +58,6 @@ class HomeScreen extends React.Component {
     auth.onAuthStateChanged((user) => {
           if (user) {
               this.setState({ userID: user.uid });
-              console.log(this.state);
               this.props.navigation.navigate('Profile', {
                 userID: this.state.userID,
                 clientID: this.state.clientID

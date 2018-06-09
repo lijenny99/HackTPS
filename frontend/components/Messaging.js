@@ -60,12 +60,9 @@ export default class Messaging extends React.Component {
             <View><AutomatedMsg/></View>
 
             <View style={styles.container}>
-
-
                 {this.state.messages.map(message => {
                     return <Message text={message.text} key={message.id}/>
                 })}
-
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} />
                     <TouchableHighlight style={styles.button} onPress={this.handleSend}>
