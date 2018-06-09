@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet, Image} from 'react-native';
 import ResponseButtons from './ResponseButtons';
+import BackButton from './BackButton';
 
 export default class Party extends React.Component {
     state = {
@@ -16,6 +17,8 @@ export default class Party extends React.Component {
 
     render() {
         return (
+          <View style={styles.container}>
+          <BackButton goBack={this.props.goBack}/>
             <View style={styles.container}>
                 <View style={styles.img}>
                     <Image source={require('../assets/DidYouKnow.png')} style={{width: 130, height: 100}} />
@@ -26,6 +29,7 @@ export default class Party extends React.Component {
                 </Text>
                 {this.state.pastEleven ? <TouchableHighlight style={styles.button2} onPress={() => this.props.navigation.navigate('FileComplaint')} ><Text style={{color: 'white', textAlign: 'center', width: 200}}>File Noise Complaint</Text></TouchableHighlight> : ''}
                 <ResponseButtons goBack={this.props.goBack} contact={this.props.handleContact}/>
+            </View>
             </View>
         )
     }
