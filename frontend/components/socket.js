@@ -1,13 +1,14 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:3000/api');
+const socket;
 
-function connect(user, cb) {
+function socket_connect(user, cb) {
     /*
     User layout:
     {
         user_id: String,
     }
     */
+    socket = openSocket('https://bravetheheat.herokuapp.com/api')
 
     socket.on("connection", () => {
         let response = {
@@ -18,7 +19,7 @@ function connect(user, cb) {
     });
 }
 
-function create_session(user, cb) {
+function socket_create_session(user, cb) {
     /*
     User layout:
     {
@@ -40,7 +41,7 @@ function create_session(user, cb) {
     });
 }
 
-function send_message(user, message) {
+function socket_send_message(user, message) {
     /*
     User layout:
     {
@@ -60,7 +61,7 @@ function send_message(user, message) {
     socket.emit("message", data);
 }
 
-function listener(user, cb) {
+function socket_listener(user, cb) {
     /*
     User layout:
     {
@@ -83,6 +84,4 @@ function listener(user, cb) {
     })
 }
 
-exports = {
-    connect, create_session, send_message, listener
-}
+export default sock;

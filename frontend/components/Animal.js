@@ -7,8 +7,8 @@ class Animal extends React.Component {
 
     call () {
         const args = {
-            number: '4163387297', // String value with the number to call
-            prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+            number: '4163387297', 
+            prompt: false 
           }
         
         call(args).catch(console.error)

@@ -5,7 +5,8 @@ import { createStackNavigator } from 'react-navigation';
 import FileComplaint from './components/FileComplaint';
 const firebase = require('./components/firebase');
 const auth = firebase.auth();
-// import {connect, create_session, send_message, listener} from './components/socket';
+import openSocket from 'socket.io-client';
+
 
 
 class HomeScreen extends React.Component {
@@ -23,6 +24,18 @@ class HomeScreen extends React.Component {
     userID: '',
   }
 
+  componentDidMount() {
+    const socket = openSocket('https://bravetheheat.herokuapp.com/api');
+    socket.on("connection", () => {
+      let response = {
+          status: "connected",
+          client_id: socket.id,
+      }
+      console.log(response.status);
+  })
+}
+
+
   handleUsername = (e) => {
     this.setState({username: e.nativeEvent.text.toLowerCase()});
   }
@@ -37,8 +50,12 @@ class HomeScreen extends React.Component {
       password: this.state.password
     }
     
+
+
     auth.signInWithEmailAndPassword(this.state.username, this.state.password)
         .then(() => {
+            
+          });
             console.log(`Authenticated!`);
 
         })
@@ -49,6 +66,7 @@ class HomeScreen extends React.Component {
       auth.onAuthStateChanged((user) => {
           if (user) {
               this.setState({userID: user.email });
+              
               this.props.navigation.navigate('Profile');
           } else {
               this.setState({errorMessage: 'failed to authenticate'})
