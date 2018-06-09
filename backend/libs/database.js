@@ -18,8 +18,8 @@ function newSession(session_id, timestamp, category="") {
   }
   firebase.database().ref('sessions/' + session_id ).set( sessionData, errCallback)
 }
-//create user that is mapped to the unique session
-function addUser(session_id, user_id, client_id, username=""){
+//create a user that is mapped to the unique session
+function newUser(session_id, user_id, client_id, username=""){
   sessionData = {}
   sessionData[user_id] = {
       "client_id": client_id,
@@ -29,8 +29,19 @@ function addUser(session_id, user_id, client_id, username=""){
   console.log(sessionData)
   firebase.database().ref('members/'+ session_id).set(sessionData, errCallback)
 }
+//update without deleting children
+function updateUser(session_id, user_id, client_id, username=""){
+  sessionData = {}
+  sessionData[user_id] = {
+      "client_id": client_id,
+      "username": username
+    }
+
+  console.log(sessionData)
+  firebase.database().ref('members/'+ session_id).update(sessionData, errCallback)
+}
 function initializeMessage(session_id){
-  firebase.database().ref('messages/'+ session_id).set({test: 'test'}, errCallback)
+  firebase.database().ref('messages/'+ session_id).set({initial: ""}, errCallback)
 }
 //the callable function to create a new session and store in the database.
 //stores session, stores one client
@@ -43,7 +54,7 @@ function createSession(obj){
 
   if (session_id && client_id && time_stamp && user_id){
     newSession(session_id, time_stamp, category)
-    addUser(session_id, user_id, client_id)
+    newUser(session_id, user_id, client_id)
     initializeMessage(session_id)
   }
   else{
@@ -59,14 +70,18 @@ function addMessage(obj){
            user_id: obj.user_id,
            message: obj.message
        }
-  firebase.database().ref('messages/' + obj.session_id + "/" + obj.time_stamp).set(message, errCallback)
+  console.log("message")
+  firebase.database().ref('messages/' + String(obj.session_id) + "/" + String(obj.time_stamp)).set(message, errCallback)
 }
 //READ information
+//find out members in a chat, returns user_ids via a promise
 function getMembers(session_id){
   if(session_id){
-    firebase.database().ref('members/' + session_id)
+    return firebase.database().ref('members/' + session_id)
     .once('value').then(function(snapshot){
-      return snapshot.val();
+      var keys = Object.keys(snapshot.val())
+
+      return snapshot.val()
     })
   }
 }
@@ -79,15 +94,24 @@ const testObj = {
 }
 let message1 = {
            client_id: 1234,
-           session_id: 3,
+           session_id: 1,
            time_stamp: 12345632435,
            user_id: 1231,
-           message: "testing"
+           message: "testing?"
        }
 let message2 = {
                 client_id: 12345,
-                session_id: 3,
+                session_id: 1,
                 time_stamp: 12345632436,
                 user_id: 1231,
                 message: "testing"
   }
+addMessage(message1)
+module.exports = {
+  addMessage : addMessage,
+  newSession: newSession,
+  newUser: newUser,
+  getMembers: getMembers,
+  updateUser: updateUser,
+  createSession: createSession
+}
