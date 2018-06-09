@@ -54,11 +54,8 @@ class HomeScreen extends React.Component {
 
     auth.signInWithEmailAndPassword(this.state.username, this.state.password)
         .then(() => {
-            
-          });
-            console.log(`Authenticated!`);
-
-        })
+          console.log(`Authenticated!`);
+          })
         .catch((err) => {
             console.log(err);
         })
