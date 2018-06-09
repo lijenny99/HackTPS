@@ -1,6 +1,8 @@
 import React from 'react';
-import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput} from 'react-native';
+import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
+import GreyBox from './GreyBox';
+import BlueBox from './BlueBox';
 
 export default class Messaging extends React.Component {
     state = {
@@ -24,13 +26,22 @@ export default class Messaging extends React.Component {
     render() {
         return (
             <ImageBackground style={styles.container} source={require('../assets/background-white.jpg')}>
+            <ScrollView>
             <DisplayPic />
+            <GreyBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} on />
                     <TouchableHighlight style={styles.button} onPress={this.handleSearch}>
                         <Text style={{color: 'white', padding: 10, paddingLeft: 20, paddingRight: 20}}>Search</Text>
                     </TouchableHighlight>
                 </View>
+                </ScrollView>
             </ImageBackground>
         )
     }
