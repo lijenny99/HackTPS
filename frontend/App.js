@@ -61,7 +61,7 @@ class HomeScreen extends React.Component {
         <Text style={styles.label}>Enter Your Username</Text>
         <TextInput style={styles.input} onChange={this.handleUsername}/>
         <Text style={styles.label}>Enter Your Password</Text>
-        <TextInput style={styles.input} onChange={this.handlePassword}/>
+        <TextInput style={styles.input} onChange={this.handlePassword} secureTextEntry={true}/>
         <TouchableHighlight style={styles.button} onPress={this.handleSubmit}>
           <Text style={{color: 'white'}}>Login</Text>
         </TouchableHighlight>
