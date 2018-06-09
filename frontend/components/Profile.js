@@ -127,14 +127,14 @@ const styles = StyleSheet.create({
     homeAction: {
       width: 150,
       height: 150,
-      marginLeft: 25,
+      marginLeft: 20,
       alignItems: 'center',
       justifyContent: 'center',
-      shadowOffset: {width: 0, height: 4},
+      shadowOffset: {width: 0, height: 5},
       shadowColor: 'grey',
-      shadowRadius: 30,
+      shadowRadius: 5,
       shadowOpacity: 0.5,
-      borderRadius: 5,
+      borderRadius: 15,
       backgroundColor: 'white'
     },
     input: {
