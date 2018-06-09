@@ -1,8 +1,11 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet, Image} from 'react-native';
 import ResponseButtons from './ResponseButtons';
+import BackButton from './BackButton';
 
 const Sketch = (props) => (
+  <View style={styles.container}>
+  <BackButton goBack={props.goBack}/>
     <View style={styles.container}>
         <View style={styles.img}>
             <Image source={require('../assets/DidYouKnow.png')} style={{width: 130, height: 100}} />
@@ -12,6 +15,7 @@ const Sketch = (props) => (
             blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
         </Text>
         <ResponseButtons goBack={props.goBack} contact={props.handleContact}/>
+    </View>
     </View>
 )
 
