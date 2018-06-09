@@ -1,12 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground } from 'react-native';
 import Profile from './components/Profile';
 import { createStackNavigator } from 'react-navigation';
+import FileComplaint from './components/FileComplaint';
 
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Login',
+    header: () => {
+    }
   };
 
   state = {
@@ -29,7 +32,6 @@ class HomeScreen extends React.Component {
       username: this.state.username, 
       password: this.state.password
     }
-    console.log(data);
     fetch('https://bravetheheat.herokuapp.com/login', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -41,7 +43,8 @@ class HomeScreen extends React.Component {
     .then(res => res.json())
     .then(res => {
       if (res.statusCode === 200) {
-        this.setState({errorMessage: res.data})
+        this.setState({errorMessage: res.data._id});
+        this.props.navigation.navigate('Profile');
       } else {
         this.setState({errorMessage: res.error});
       }
@@ -49,26 +52,25 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    
     return (
-      <View style={styles.container}>
-        <Text>{this.state.errorMessage}</Text>
+      <ImageBackground style={styles.container} source={require('./assets/background.jpg')}>
         <Text style={styles.text}>Log In</Text>
         <Text style={styles.label}>Enter Your Username</Text>
         <TextInput style={styles.input} onChange={this.handleUsername}/>
         <Text style={styles.label}>Enter Your Password</Text>
         <TextInput style={styles.input} onChange={this.handlePassword}/>
         <TouchableHighlight style={styles.button} onPress={this.handleSubmit}>
-          <Text>Login</Text>
+          <Text style={{color: 'white'}}>Login</Text>
         </TouchableHighlight>
-      </View>
+      </ImageBackground>
     );
   }
 }
 
 export default createStackNavigator({
   Home: { screen: HomeScreen },
-  Profile: {screen: Profile}
+  Profile: {screen: Profile},
+  FileComplaint: {screen: FileComplaint}
 });
 
 const styles = StyleSheet.create({
@@ -76,19 +78,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   text: {
     fontSize: 30,
     fontWeight: 'bold',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: '5%'
   },
   input: {
     width: 200,
+    padding: 10,
     borderRadius: 5,
     borderWidth: 0.5,
     borderColor: 'grey',
-    marginBottom: '5%'
+    marginBottom: '5%',
+    backgroundColor: '#e6f2f4'
   },
   label: {
     marginTop: '2%',
@@ -98,17 +103,9 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    backgroundColor: 'green',
-    borderRadius: 10
+    paddingLeft: 30,
+    paddingRight: 30,
+    backgroundColor: '#0192a8',
+    borderRadius: 40
   }
 });
-
-
-/* 
-Registration 
-GPS coordinates & notifications
-Map 
-Upload photo
-Form Entry, submit info
-General information /about 
-*/
