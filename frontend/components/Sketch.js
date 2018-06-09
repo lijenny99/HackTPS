@@ -8,7 +8,7 @@ const Sketch = (props) => (
             <Image source={require('../assets/DidYouKnow.png')} style={{width: 130, height: 100}} />
         </View>
         <Text style={styles.smallText}>
-            If there is a party near you and you would like to file a noise complaint, please consider speaking directly 
+            If there is a party near you and you would like to file a noise complaint, please consider speaking directly
             blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
         </Text>
         <ResponseButtons goBack={props.goBack}/>

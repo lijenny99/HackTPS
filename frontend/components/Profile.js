@@ -4,12 +4,13 @@ import {Text, View, TouchableHighlight, StyleSheet, Image, TextInput, KeyboardAv
 import Sketch from './Sketch';
 import Party from './Party';
 import Icon from './Icon';
+import Animal from './Animal';
 
 export default class Profile extends React.Component {
     state = {
         page: '',
         query: ''
-    }    
+    }
 
     static navigationOptions = {
         title: 'Categories',
@@ -19,10 +20,14 @@ export default class Profile extends React.Component {
 
     handleParty = () => {
         this.setState({page: 'party'})
-    }   
+    }
 
     handleSketch = () => {
         this.setState({page: 'sketch'})
+    }
+
+    handleAnimal = () => {
+        this.setState({page: 'animal'})
     }
 
     goBack = () => {
@@ -53,7 +58,7 @@ export default class Profile extends React.Component {
                         <TouchableHighlight onPress={this.handleParty} style={styles.homeAction}>
                             <Icon source={require('../assets/homeless.png')} style={styles.img} title="Homeless" />
                         </TouchableHighlight>
-                        <TouchableHighlight style={styles.homeAction} onPress={this.handleSketch}>
+                        <TouchableHighlight style={styles.homeAction} onPress={this.handleAnimal}>
                             <Icon source={require('../assets/animals.png')} style={styles.img} title="Animals" />
                         </TouchableHighlight>
                     </View>
@@ -81,8 +86,12 @@ export default class Profile extends React.Component {
             return (
                 <Sketch goBack={this.goBack} navigation={this.props.navigation}/>
             )
+        } else if (this.state.page === 'animal') {
+            return (
+                <Animal goBack={this.goBack} navigation={this.props.navigation}/>
+            )
         }
-        
+
     }
 }
 
