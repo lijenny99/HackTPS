@@ -13,6 +13,8 @@ io.attach(server, {
 
 });
 
+server.listen(3000, () => console.log(`Socket opened at 3000`));
+
 io.on("connection", socket => {
     let client_id = socket.id;
     console.log(`New client connected with session ID ${session_id}`);
