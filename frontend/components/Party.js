@@ -24,8 +24,13 @@ export default class Party extends React.Component {
                     If there is a party near you and you would like to file a noise complaint, please consider speaking directly
                     blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
                 </Text>
+<<<<<<< Updated upstream
                 {this.state.pastEleven ? <TouchableHighlight style={styles.button2} onPress={() => this.props.navigation.navigate('FileComplaint')} ><Text style={{color: 'white', textAlign: 'center', width: 200}}>File Noise Complaint</Text></TouchableHighlight> : ''}
                 <ResponseButtons goBack={this.props.goBack} contact={this.props.handleContact}/>
+=======
+                {this.state.pastEleven ? <TouchableHighlight style={styles.button2} onPress={() => this.props.navigation.navigate('FileComplaint')} ><Text style={{color: 'white', textAlign: 'center', width: 200, marginTop: '5%'}}>File Noise Complaint</Text></TouchableHighlight> : ''}
+                <ResponseButtons goBack={this.props.goBack} />
+>>>>>>> Stashed changes
             </View>
         )
     }
