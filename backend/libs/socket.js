@@ -20,13 +20,13 @@ io.on("connect", socket => {
         }
         socket.join(session_id, () => {
             console.log(`Room with session id ${session_id} with client ${client_id} created`);
-            socket.to(data.client_id).emit('session_created', {
+            socket.to(session_id).emit('session_created', {
                 status: true,
                 client_id: data.client_id,
                 user_id: data.user_id,
                 time_stamp: time_stamp,
                 session_id: session_id
-            }).then(() => console.log("message sent."));
+            })
         })
 
 
