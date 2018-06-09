@@ -2,6 +2,11 @@ import React from 'react';
 import {TouchableHighlight, View, Text, StyleSheet, KeyboardAvoidingView, Image, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
 import Message from './Message';
+<<<<<<< Updated upstream
+=======
+import BackButton from './BackButton';
+import AutomatedMsg from './AutomatedMsg';
+>>>>>>> Stashed changes
 import openSocket from 'socket.io-client';
 
 const socket = openSocket('https://bravetheheat.herokuapp.com/');
@@ -57,14 +62,10 @@ export default class Messaging extends React.Component {
             <KeyboardAvoidingView style={styles.container} source={require('../assets/background-white.jpg')}>
 
             <ScrollView>
+            <View><AutomatedMsg/></View>
 
             <View style={styles.container}>
-            <TouchableHighlight onPress={this.handleBack} >
-                <Image style={styles.img} source={require('../assets/back-arrow.png')} style={{resizeMode: 'contain', alignSelf:'flex-end', width: 100}}/>
-            </TouchableHighlight>
 
-
-            <DisplayPic />
 
                 {this.state.messages.map(message => {
                     return <Message text={message.text} key={message.id}/>
@@ -77,6 +78,12 @@ export default class Messaging extends React.Component {
                     </TouchableHighlight>
                 </View>
                 </View>
+
+                <TouchableHighlight onPress={this.handleBack} >
+                    <Image style={styles.img} source={require('../assets/back-arrow.png')} style={{resizeMode: 'contain', alignSelf:'flex-end', width: 100}}/>
+                </TouchableHighlight>
+
+                
                 </ScrollView>
             </KeyboardAvoidingView>
         )
