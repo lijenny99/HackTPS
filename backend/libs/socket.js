@@ -12,7 +12,7 @@ io.on("connect", socket => {
         let time_stamp = Date.now();
         session_id = gen_session();
         let info = {
-            client_id: client_id,
+            client_id: data.client_id,
             user_id: data.user_id,
             time_stamp: time_stamp,
             session_id: session_id,
@@ -22,7 +22,7 @@ io.on("connect", socket => {
             console.log(`Room with session id ${session_id} with client ${client_id} created`);
             let response = {
                 status: true,
-                client_id: client_id,
+                client_id: data.client_id,
                 user_id: data.user_id,
                 time_stamp: time_stamp,
                 session_id: session_id
@@ -90,7 +90,7 @@ io.on("connect", socket => {
 
     })
 
-    socket.on("disconnect", () => console.log(`${session_id} disconnected`));
+    socket.on("disconnect", () => console.log(`${client_id} disconnected`));
 });
 
 function gen_session() {
