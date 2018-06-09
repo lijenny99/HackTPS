@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+        var socket = io('http://localhost:3000');
+        socket.on("connect", (data) => {
+            console.log("connected!");
+        });
+        socket.on('tweet', (data) => {
+            console.log("received");
+            console.log(data);
+            if (data.location != null) {
+                console.log(data.location)
+                newMarker(map, data.location);
+            };
+        });
+        socket.on("message", (data) => {
+            console.log("something!");
+        });
+
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiYnJhdmV0aGVoZWF0IiwiYSI6ImNqaTNmMnAwYTByMjAzcW50amIwdzc2cHYifQ.nG6ileQvpSg3jXrWZfTfzQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/satellite-streets-v9',
+            minZoom: 2
+        });
+
+
+
+        function newMarker(map, location) {
+            let marker = new mapboxgl.Marker()
+                .setLngLat(location)
+                .addTo(map);
+
+        }
+    </script>
+</body>

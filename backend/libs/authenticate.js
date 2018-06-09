@@ -1,24 +1,27 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
 const passport_mongoose = require('passport-local-mongoose');
 const express = require('express');
 const express_session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
+const bodyParser = require('body-parser');
+const cors = require("cors");
 
 const router = express.Router();
 
-const mongo_url = "mongodb+srv://hacktps:mcef16UYhq7dOF47@hacktps-8zdri.mongodb.net/test?retryWrites=true";
+const mongo_url = "mongodb://hacktps:hacktps1@ds239940.mlab.com:39940/hacktps";
 
 const User = require("./schema.js");
 
-mongoose.connect(mongo_url);
-router.use(passport.initialize());
-router.use(passport.session());
+mongoose.connect(mongo_url, (err, db) => {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log("Successfully Connected");
+    }
 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+});
+
 
 router.use(express_session({
     secret: "somesecret",
@@ -26,12 +29,19 @@ router.use(express_session({
     saveUninitialized: true
 }));
 
-
 router.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.Username = User.username;
     next();
 })
+
+router.use(passport.initialize());
+router.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 router.post("/register", (req, res) => {
     let info = {
@@ -56,12 +66,13 @@ router.post("/register", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-    passport.authenticate("local", (err, user) => {
-        console.log(`${user} authenticated`);
-        if (!err) {
-            res.send(JSON.stringify({ data: user._id, statusCode: 200 }))
-        }
+    console.log("/login post");
+    console.log(req);
+    passport.authenticate("local")(req, res, () => {
+        console.log("Authenticated");
+        console.log(req);
+        res.send(JSON.stringify({ data: req.user, statusCode: 200 }));
     })
-})
+});
 
 module.exports = router;
