@@ -53,15 +53,21 @@ export default class Messaging extends React.Component {
     render() {
         return (
             <ImageBackground style={styles.container} source={require('../assets/background-white.jpg')}>
+            <ScrollView>
+            <DisplayPic />
+
+                {this.state.messages.map(message => {
+                    return <Message text={message.text} key={message.id}/>
+                })}
+
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} />
                     <TouchableHighlight style={styles.button} onPress={this.handleSend}>
                         <Text style={{color: 'white', padding: 10, paddingLeft: 20, paddingRight: 20}}>Search</Text>
                     </TouchableHighlight>
                 </View>
-                {this.state.messages.map(message => {
-                    return <Message text={message.text} key={message.id}/>
-                })}
+                
+                </ScrollView>
             </ImageBackground>
         )
     }
