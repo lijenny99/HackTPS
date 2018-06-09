@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 import FileComplaint from './components/FileComplaint';
 const firebase = require('./components/firebase');
 const auth = firebase.auth();
+// import {connect, create_session, send_message, listener} from './components/socket';
 
 
 class HomeScreen extends React.Component {
