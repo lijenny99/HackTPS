@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground 
 import Profile from './components/Profile';
 import { createStackNavigator } from 'react-navigation';
 import FileComplaint from './components/FileComplaint';
+const firebase = require('./firebase');
+const auth = firebase.auth();
 
 
 class HomeScreen extends React.Component {
@@ -32,23 +34,45 @@ class HomeScreen extends React.Component {
       username: this.state.username, 
       password: this.state.password
     }
-    fetch('https://bravetheheat.herokuapp.com/login', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(res => res.json())
-    .then(res => {
-      if (res.statusCode === 200) {
-        this.setState({errorMessage: res.data._id});
-        this.props.navigation.navigate('Profile');
-      } else {
-        this.setState({errorMessage: res.error});
-      }
-    })
+
+    
+    auth.signInWithEmailAndPassword(this.state.username, this.state.password)
+        .then(() => {
+            console.log(`Authenticated!`);
+            callback("Authenticated");
+        })
+        .catch((err) => {
+            console.log(err);
+            callback("Error");
+        })
+    
+      auth.onAuthStateChanged((user) => {
+          if (user) {
+              this.setState({errorMessage: user.email});
+              this.props.navigation.navigate('Profile');
+          } else {
+              this.setState({errorMessage: 'failed to authenticate'})
+          }
+      })
+    
+
+    // fetch('https://bravetheheat.herokuapp.com/login', {
+    //   method: 'POST',
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    // })
+    // .then(res => res.json())
+    // .then(res => {
+    //   if (res.statusCode === 200) {
+    //     this.setState({errorMessage: res.data._id});
+    //     this.props.navigation.navigate('Profile');
+    //   } else {
+    //     this.setState({errorMessage: res.error});
+    //   }
+    // })
   }
 
   render() {

@@ -4,7 +4,7 @@ import ResponseButtons from './ResponseButtons';
 
 export default class Party extends React.Component {
     state = {
-        pastEleven: true
+        pastEleven: false
     }
 
     componentDidMount () {
