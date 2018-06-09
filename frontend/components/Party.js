@@ -4,7 +4,7 @@ import ResponseButtons from './ResponseButtons';
 
 export default class Party extends React.Component {
     state = {
-        pastEleven: false
+        pastEleven: true
     }
 
     componentDidMount () {
@@ -21,7 +21,7 @@ export default class Party extends React.Component {
                     <Image source={require('../assets/DidYouKnow.png')} style={{width: 130, height: 100}} />
                 </View>
                 <Text style={styles.smallText}>
-                    If there is a party near you and you would like to file a noise complaint, please consider speaking directly 
+                    If there is a party near you and you would like to file a noise complaint, please consider speaking directly
                     blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
                 </Text>
                 {this.state.pastEleven ? <TouchableHighlight style={styles.button2} onPress={() => this.props.navigation.navigate('FileComplaint')} ><Text style={{color: 'white', textAlign: 'center', width: 200}}>File Noise Complaint</Text></TouchableHighlight> : ''}
@@ -74,4 +74,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 })
-
