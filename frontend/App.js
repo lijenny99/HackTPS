@@ -6,6 +6,7 @@ import FileComplaint from './components/FileComplaint';
 const firebase = require('./components/firebase');
 const auth = firebase.auth();
 import openSocket from 'socket.io-client';
+import Messaging from './components/Messaging';
 
 
 class HomeScreen extends React.Component {
@@ -93,7 +94,8 @@ class HomeScreen extends React.Component {
 export default createStackNavigator({
   Home: { screen: HomeScreen },
   Profile: {screen: Profile},
-  FileComplaint: {screen: FileComplaint}
+  FileComplaint: {screen: FileComplaint},
+  Messaging: { screen: Messaging }
 });
 
 const styles = StyleSheet.create({

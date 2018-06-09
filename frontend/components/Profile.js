@@ -13,11 +13,11 @@ export default class Profile extends React.Component {
         page: '',
         query: '',
         userID: '',
-        clientID: ''
+        clientID: '',
+        sessionID: ''
     }
 
     componentDidMount() {
-        
         const userID = this.props.navigation.getParam('userID', '');
         const clientID = this.props.navigation.getParam('clientID', '');
         this.setState({userID: userID, clientID: clientID});
@@ -32,13 +32,14 @@ export default class Profile extends React.Component {
     handleContact = () => {
         console.log('handling contact...');
         socket.on("session_created", (data) => {
-            console.log(data);
+            this.setState({sessionID: data.session_id})
         });
         socket.emit("create_session", {
             user_id: this.state.userID,
             client_id: socket.id,
             category: ''
         });
+        this.props.navigation.navigate('Messaging', {user: this.state.userID, client: this.state.clientID, session: this.state.sessionID});
     }
 
     handleParty = () => {
