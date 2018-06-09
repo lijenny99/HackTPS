@@ -1,39 +1,26 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet, Image} from 'react-native';
 import ResponseButtons from './ResponseButtons';
-import call from 'react-native-phone-call';
+import BackButton from './BackButton';
 
-class Animal extends React.Component {
-
-    call () {
-        const args = {
-            number: '4163387297', 
-            prompt: false 
-          }
-        
-        call(args).catch(console.error)
-        
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.img}>
-                    <Image source={require('../assets/DidYouKnow.png')} style={{width: 130, height: 100}} />
-                </View>
-                <Text style={styles.smallText}>
-                The City of Toronto inspects and investigates animal-related complaints to ensure compliance with acts, bylaws and regulations.
-                This is done through the Animal Control program.
-                </Text>
-                <TouchableHighlight style={styles.button3} onPress={this.call} >
-                <Text style={{color: 'white', textAlign: 'center', width: 200, marginTop: '5%'}}>Call 416-338-PAWS</Text>
-                </TouchableHighlight>
-                <ResponseButtons goBack={this.props.goBack} contact={this.props.handleContact}/>
-            </View>
-        )
-    }
-} 
-
+const Animal = (props) => (
+    <View style={styles.container}>
+    <BackButton goBack={props.goBack}/>
+    <View style={styles.container}>
+        <View style={styles.img}>
+            <Image source={require('../assets/DidYouKnow.png')} style={{width: 130, height: 100}} />
+        </View>
+        <Text style={styles.smallText}>
+        The City of Toronto inspects and investigates animal-related complaints to ensure compliance with acts, bylaws and regulations.
+        This is done through the Animal Control program.
+        </Text>
+        <TouchableHighlight style={styles.button3} onPress={() => this.props.navigation.navigate('FileComplaint')} >
+          <Text style={{color: 'white', textAlign: 'center', width: 200, marginTop: '5%'}}>Call 416-338-PAWS</Text>
+        </TouchableHighlight>
+        <ResponseButtons goBack={props.goBack}/>
+    </View>
+    </View>
+)
 const styles = StyleSheet.create({
     h1: {
         fontSize: 20,
