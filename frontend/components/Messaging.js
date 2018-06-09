@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, Image, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
+import {TouchableHighlight, View, Text, StyleSheet, KeyboardAvoidingView, Image, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
 import Message from './Message';
 import openSocket from 'socket.io-client';
@@ -54,7 +54,7 @@ export default class Messaging extends React.Component {
 
     render() {
         return (
-            <ImageBackground style={styles.container} source={require('../assets/background-white.jpg')}>
+            <KeyboardAvoidingView style={styles.container} source={require('../assets/background-white.jpg')}>
 
             <ScrollView>
 
@@ -78,7 +78,7 @@ export default class Messaging extends React.Component {
                 </View>
                 </View>
                 </ScrollView>
-            </ImageBackground>
+            </KeyboardAvoidingView>
         )
     }
 }
