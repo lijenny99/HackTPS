@@ -1,7 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import Profile from './components/Profile';
+import { createStackNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
+
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Login',
+  };
+
   state = {
     username: '',
     password: '',
@@ -10,33 +17,43 @@ export default class App extends React.Component {
   }
 
   handleUsername = (e) => {
-    this.setState({username: e.nativeEvent.text});
+    this.setState({username: e.nativeEvent.text.toLowerCase()});
   }
 
   handlePassword = (e) => {
-    this.setState({password: e.nativeEvent.text});
+    this.setState({password: e.nativeEvent.text.toLowerCase()});
   }
 
   handleSubmit = (e) => {
-    fetch('/login', {
-      method: 'POST'
+    const data = {
+      username: this.state.username, 
+      password: this.state.password
+    }
+    console.log(data);
+    fetch('https://bravetheheat.herokuapp.com/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
     })
     .then(res => res.json())
     .then(res => {
       if (res.statusCode === 200) {
-        console.log('logged in!');
-        this.setState({redirect: 'home'})
+        this.setState({errorMessage: res.data})
       } else {
-        this.setState({errorMessage: res.error})
+        this.setState({errorMessage: res.error});
       }
     })
   }
 
   render() {
+    
     return (
-      <Text>{this.state.errorMessage}</Text>
       <View style={styles.container}>
-        <Text style={styles.text}>Sign Up</Text>
+        <Text>{this.state.errorMessage}</Text>
+        <Text style={styles.text}>Log In</Text>
         <Text style={styles.label}>Enter Your Username</Text>
         <TextInput style={styles.input} onChange={this.handleUsername}/>
         <Text style={styles.label}>Enter Your Password</Text>
@@ -48,6 +65,11 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default createStackNavigator({
+  Home: { screen: HomeScreen },
+  Profile: {screen: Profile}
+});
 
 const styles = StyleSheet.create({
   container: {
