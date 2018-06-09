@@ -8,7 +8,6 @@ const auth = firebase.auth();
 import openSocket from 'socket.io-client';
 
 
-
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Login',
@@ -25,8 +24,8 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    const socket = openSocket('https://bravetheheat.herokuapp.com/api');
-    socket.on("connection", () => {
+    const socket = openSocket('https://bravetheheat.herokuapp.com/');
+    socket.on("connect", () => {
       let response = {
           status: "connected",
           client_id: socket.id,
