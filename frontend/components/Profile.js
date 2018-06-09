@@ -108,12 +108,11 @@ const styles = StyleSheet.create({
     input: {
       width: 200,
       padding: 10,
-      borderRadius: 5,
       borderWidth: 0.5,
       borderColor: 'grey',
       marginBottom: '5%',
       marginTop: '5%',
-      backgroundColor: '#e6f2f4'
+      backgroundColor: '#fcfdff'
     },
     img: {
       width: '80%',
@@ -122,8 +121,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 100,
-        backgroundColor: 'lightblue',
-        borderRadius: 40,
+        backgroundColor: '#023d75',
         marginLeft: 20,
         alignItems: 'center'
     }
