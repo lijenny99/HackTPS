@@ -8,22 +8,22 @@ const Message = (props) => (
 )
 
 const styles = StyleSheet.create({
-    txt: {
-      width: 170,
-      fontSize: 14,
-      textAlign: 'left'
+  txt: {
+    width: 170,
+    fontSize: 14,
+    textAlign: 'left'
 
-    },
+  },
 
-    rectangle: {
-      marginLeft: 40,
-      width: 200,
-      backgroundColor: '#F2F2F2',
-      padding: 15,
-      borderRadius: 15,
-      borderBottomLeftRadius: 0,
-      marginBottom: 10
-    }
+  rectangle: {
+    width: 200,
+    backgroundColor: '#E9F6FF',
+    padding: 15,
+    borderRadius: 15,
+    borderBottomRightRadius: 0,
+    marginBottom: 10,
+    alignSelf: 'flex-end',
+  }
 })
 
 export default Message;

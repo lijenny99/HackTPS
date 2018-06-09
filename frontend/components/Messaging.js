@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
 import Message from './Message';
+import BackButton from './BackButton';
 import openSocket from 'socket.io-client';
 
 const socket = openSocket('https://bravetheheat.herokuapp.com/');
@@ -51,7 +52,13 @@ export default class Messaging extends React.Component {
     render() {
         return (
             <ImageBackground style={styles.container} source={require('../assets/background-white.jpg')}>
+
             <ScrollView>
+
+            <View style={styles.container}>
+            <BackButton style={{marginTop: '10%', marginBottom: '10%'}} goBack={this.handleBack}/>
+
+
             <DisplayPic />
 
                 {this.state.messages.map(message => {
@@ -64,7 +71,7 @@ export default class Messaging extends React.Component {
                         <Text style={{color: 'white', padding: 10, paddingLeft: 20, paddingRight: 20}}>Search</Text>
                     </TouchableHighlight>
                 </View>
-                
+                </View>
                 </ScrollView>
             </ImageBackground>
         )
