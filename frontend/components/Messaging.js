@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput} from 'react-native';
+import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput, ScrollView} from 'react-native';
 import DisplayPic from './DisplayPic';
 import Message from './Message';
 
@@ -41,7 +41,7 @@ export default class Messaging extends React.Component {
             session_id: this.state.session,
             message: this.state.message
         }
-    
+
         socket.emit("message", data);
 
         this.setState({messages: [...this.state.messages, this.state.message]});
@@ -50,7 +50,15 @@ export default class Messaging extends React.Component {
     render() {
         return (
             <ImageBackground style={styles.container} source={require('../assets/background-white.jpg')}>
+            <ScrollView>
             <DisplayPic />
+            <GreyBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
+            <BlueBox />
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} />
                     <TouchableHighlight style={styles.button} onPress={this.handleSend}>
@@ -60,6 +68,7 @@ export default class Messaging extends React.Component {
                 {this.state.messages.map(message => {
                     return <Message text={message.text} key={message.id}/>
                 })}
+                </ScrollView>
             </ImageBackground>
         )
     }

@@ -9,9 +9,9 @@ const DisplayPic = (props) => (
 
 const styles = StyleSheet.create({
     img: {
-      borderRadius: 25,
-      width: 50,
-      height: 50
+      borderRadius: 15,
+      width: 30,
+      height: 30
 
     }
 })

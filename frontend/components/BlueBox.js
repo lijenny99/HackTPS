@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, Image} from 'react-native';
 const GreyBox = (props) => (
     <View style={styles.rectangle}>
         <Text style={styles.txt}>
-        TestTestTestTestTestTestTestTestTestTestTestTestTest
+        yoooooooo dis is prettytyytoeiu goooooajds fkla dsflkjal dkjflkadf
         </Text>
     </View>
 )
@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
     },
 
     rectangle: {
-      marginLeft: 40,
       width: 200,
-      backgroundColor: '#F2F2F2',
+      backgroundColor: '#E9F6FF',
       padding: 15,
       borderRadius: 15,
-      borderBottomLeftRadius: 0,
-      marginBottom: 10
+      borderBottomRightRadius: 0,
+      marginBottom: 10,
+      alignSelf: 'flex-end',
     }
 })
 
