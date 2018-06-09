@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require("cors");
-const authenticate = require('./libs/authenticate.js');
+const authenticate = require('./libs/auth');
 
 app.use(cors());
 app.use(bodyParser.json());

@@ -79,7 +79,6 @@ io.on("connection", socket => {
             session_id: session_id,
             time_stamp: time_stamp,
             user_id: data._id,
-            recipient: data.recipient,
             message: data.message
         }
         // Maybe get info from database regarding user?
