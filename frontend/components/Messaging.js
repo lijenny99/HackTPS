@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableHighlight, View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TextInput} from 'react-native';
+import DisplayPic from './DisplayPic';
 
 export default class Messaging extends React.Component {
     state = {
@@ -12,7 +13,7 @@ export default class Messaging extends React.Component {
         title: 'Chat',
         header: () => {
         }
-      };   
+      };
 
     componentDidMount() {
         let user1 = this.props.navigation.getParam('user', 'NONE');
@@ -22,7 +23,8 @@ export default class Messaging extends React.Component {
 
     render() {
         return (
-            <ImageBackground style={styles.container} source={require('../assets/background.jpg')}>
+            <ImageBackground style={styles.container} source={require('../assets/background-white.jpg')}>
+            <DisplayPic />
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} on />
                     <TouchableHighlight style={styles.button} onPress={this.handleSearch}>
