@@ -17,6 +17,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "firebase": "^5.0.4",
+    "firebase-admin": "^5.12.1",
     "http": "0.0.0",
     "mongodb": "^3.0.10",
     "mongoose": "^5.1.4",
