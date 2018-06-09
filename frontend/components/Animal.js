@@ -17,7 +17,7 @@ const Animal = (props) => (
         <TouchableHighlight style={styles.button3} onPress={() => this.props.navigation.navigate('FileComplaint')} >
           <Text style={{color: 'white', textAlign: 'center', width: 200, marginTop: '5%'}}>Call 416-338-PAWS</Text>
         </TouchableHighlight>
-        <ResponseButtons goBack={props.goBack}/>
+        <ResponseButtons goBack={props.goBack} contact={this.handleContact}/>
     </View>
     </View>
 )

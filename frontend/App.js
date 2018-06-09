@@ -28,11 +28,7 @@ class HomeScreen extends React.Component {
   componentDidMount() {
     const socket = openSocket('https://bravetheheat.herokuapp.com/');
     socket.on("connect", () => {
-      let response = {
-          status: "connected",
-          client_id: socket.id,
-      }
-      this.setState({clientID: response.client_id})
+      this.setState({clientID: socket.id})
   })
 }
 
@@ -50,8 +46,6 @@ class HomeScreen extends React.Component {
       username: this.state.username, 
       password: this.state.password
     }
-    
-
 
     auth.signInWithEmailAndPassword(this.state.username, this.state.password)
         .then(() => {
@@ -61,9 +55,10 @@ class HomeScreen extends React.Component {
             console.log(err);
         })
     
-      auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
           if (user) {
-              this.setState({userID: user.email });
+              this.setState({ userID: user.uid });
+              console.log(this.state);
               this.props.navigation.navigate('Profile', {
                 userID: this.state.userID,
                 clientID: this.state.clientID
