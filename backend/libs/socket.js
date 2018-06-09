@@ -2,6 +2,7 @@ const cors = require("cors");
 const crypto = require("crypto");
 let local_cache = {}; // For sessions
 const io = require("./express");
+const db = require('./database.js');
 
 
 io.on("connect", socket => {
@@ -28,6 +29,14 @@ io.on("connect", socket => {
                 session_id: session_id
             };
             io.to(client_id).emit('session_created', response);
+            let info = {
+                client_id: data.client_id,
+                user_id: data.user_id,
+                time_stamp: time_stamp,
+                session_id: session_id,
+                category: data.category
+            }
+            //db.createSession(info);
         })
 
 
@@ -54,7 +63,7 @@ io.on("connect", socket => {
             client_id: client_id,
             session_id: session_id,
             time_stamp: time_stamp,
-            user_id: data._id,
+            user_id: data.user_id,
             recipient: recipient,
             message: `${client_id} has joined the room`
         }
@@ -82,6 +91,8 @@ io.on("connect", socket => {
 
         socket.broadcast.to(session_id, message);
         // Put info in database
+
+        //db.addMessage(message);
 
 
     })

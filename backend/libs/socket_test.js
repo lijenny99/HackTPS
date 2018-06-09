@@ -18,4 +18,12 @@ socket.on("connect", () => {
     socket.on("message", (res) => {
         console.log(res);
     })
+
+    socket.emit("message", {
+        client_id: client_id,
+        user_id: 'yo',
+        category: 'hello',
+        message: "IT's A MESSAGE"
+
+    })
 })
