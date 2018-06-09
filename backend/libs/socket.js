@@ -94,10 +94,7 @@ io.on("connect", socket => {
 
 function gen_session() {
     let token;
-    crypto.randomBytes(48, (err, buffer) => {
-        token = buffer.toString('hex');
-    })
-    return token
+    return crypto.randomBytes(48).toString('hex');
 }
 
 
