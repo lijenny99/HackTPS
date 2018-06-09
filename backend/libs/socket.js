@@ -4,9 +4,9 @@ let local_cache = {}; // For sessions
 const io = require("./express");
 
 
-io.on("connection", socket => {
+io.on("connect", socket => {
     let client_id = socket.id;
-    console.log(`New client connected with session ID ${session_id}`);
+    console.log(`New client connected with client ID ${client_id}`);
 
     socket.on("create_session", (data) => {
         let time_stamp = Date.now();

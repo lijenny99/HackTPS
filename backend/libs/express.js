@@ -10,8 +10,6 @@ const crypto = require("crypto");
 const io = require('socket.io');
 
 const socket = new io(server, {
-    path: '/api',
-    serverClient: false
 });
 
 app.use(cors());
