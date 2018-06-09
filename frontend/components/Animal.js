@@ -28,7 +28,7 @@ class Animal extends React.Component {
                 <TouchableHighlight style={styles.button3} onPress={this.call} >
                 <Text style={{color: 'white', textAlign: 'center', width: 200, marginTop: '5%'}}>Call 416-338-PAWS</Text>
                 </TouchableHighlight>
-                <ResponseButtons goBack={this.props.goBack}/>
+                <ResponseButtons goBack={this.props.goBack} contact={this.props.handleContact}/>
             </View>
         )
     }

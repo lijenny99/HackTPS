@@ -11,7 +11,7 @@ const Sketch = (props) => (
             If there is a party near you and you would like to file a noise complaint, please consider speaking directly
             blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
         </Text>
-        <ResponseButtons goBack={props.goBack}/>
+        <ResponseButtons goBack={props.goBack} contact={props.handleContact}/>
     </View>
 )
 

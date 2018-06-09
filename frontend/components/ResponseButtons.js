@@ -6,10 +6,10 @@ const ResponseButtons = (props) => (
         <Text style={styles.h1}>Was This Helpful?</Text>
         <View style={{borderBottomColor: '#023d75', borderBottomWidth: 1, marginTop:'3%' }}/>
         <View style={{flexDirection: 'row', marginTop: '5%'}}>
-            <TouchableHighlight style={styles.noButton} onPress={props.contact} >
+            <TouchableHighlight style={styles.noButton} onPress={props.contact}>
                 <Text style={{color: '#023d75'}}>No, I want to speak to someone</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.doneButton} onPress={props.goBack} >
+            <TouchableHighlight style={styles.doneButton} onPress={props.goBack}>
                 <Text style={styles.text}>Yes, thank you!</Text>
             </TouchableHighlight>
         </View>

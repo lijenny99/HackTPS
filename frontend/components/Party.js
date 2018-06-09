@@ -25,7 +25,7 @@ export default class Party extends React.Component {
                     blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
                 </Text>
                 {this.state.pastEleven ? <TouchableHighlight style={styles.button2} onPress={() => this.props.navigation.navigate('FileComplaint')} ><Text style={{color: 'white', textAlign: 'center', width: 200}}>File Noise Complaint</Text></TouchableHighlight> : ''}
-                <ResponseButtons goBack={this.props.goBack} />
+                <ResponseButtons goBack={this.props.goBack} contact={this.props.handleContact}/>
             </View>
         )
     }

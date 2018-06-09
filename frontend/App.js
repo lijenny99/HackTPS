@@ -21,6 +21,7 @@ class HomeScreen extends React.Component {
     redirect: '',
     errorMessage: '',
     userID: '',
+    clientID: ''
   }
 
   componentDidMount() {
@@ -30,7 +31,7 @@ class HomeScreen extends React.Component {
           status: "connected",
           client_id: socket.id,
       }
-      console.log(response.status);
+      this.setState({clientID: response.client_id})
   })
 }
 
@@ -62,8 +63,10 @@ class HomeScreen extends React.Component {
       auth.onAuthStateChanged((user) => {
           if (user) {
               this.setState({userID: user.email });
-              
-              this.props.navigation.navigate('Profile');
+              this.props.navigation.navigate('Profile', {
+                userID: this.state.userID,
+                clientID: this.state.clientID
+              });
           } else {
               this.setState({errorMessage: 'failed to authenticate'})
           }

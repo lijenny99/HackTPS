@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet, Image, TextInput, KeyboardAvoidingView} from 'react-native';
-
+import openSocket from 'socket.io-client';
 import Sketch from './Sketch';
 import Party from './Party';
 import Icon from './Icon';
@@ -9,7 +9,15 @@ import Animal from './Animal';
 export default class Profile extends React.Component {
     state = {
         page: '',
-        query: ''
+        query: '',
+        userID: '',
+        clientID: ''
+    }
+
+    componentDidMount() {
+        const userID = this.props.navigation.getParam('userID', '');
+        const clientID = this.props.navigation.getParam('clientID', '');
+        this.setState({userID: userID, clientID: clientID});
     }
 
     static navigationOptions = {
@@ -17,6 +25,19 @@ export default class Profile extends React.Component {
         header: () => {
         }
     };
+
+    handleContact = () => {
+        console.log('handling contact...');
+        const socket = openSocket('https://bravetheheat.herokuapp.com/');
+        socket.emit("create_session", {
+            user_id: this.state.userID,
+            client_id: this.state.clientID,
+            category: ''
+        });
+        socket.on("session_created", (data) => {
+        console.log(data);
+    });
+    }
 
     handleParty = () => {
         this.setState({page: 'party'})
@@ -80,15 +101,15 @@ export default class Profile extends React.Component {
             )
         } else if (this.state.page === 'party') {
             return (
-                <Party goBack={this.goBack} navigation={this.props.navigation}/>
+                <Party goBack={this.goBack} navigation={this.props.navigation} handleContact={this.handleContact}/>
             )
         } else if (this.state.page === 'sketch') {
             return (
-                <Sketch goBack={this.goBack} navigation={this.props.navigation}/>
+                <Sketch goBack={this.goBack} navigation={this.props.navigation} handleContact={this.handleContact}/>
             )
         } else if (this.state.page === 'animal') {
             return (
-                <Animal goBack={this.goBack} navigation={this.props.navigation}/>
+                <Animal goBack={this.goBack} navigation={this.props.navigation} handleContact={this.handleContact}/>
             )
         }
 
