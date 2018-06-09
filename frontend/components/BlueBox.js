@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
       borderBottomRightRadius: 0,
       marginBottom: 10,
       alignSelf: 'flex-end',
-      marginRight: 40
     }
 })
 
