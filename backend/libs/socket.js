@@ -63,7 +63,7 @@ io.on("connect", socket => {
             client_id: client_id,
             session_id: session_id,
             time_stamp: time_stamp,
-            user_id: data._id,
+            user_id: data.user_id,
             recipient: recipient,
             message: `${client_id} has joined the room`
         }
