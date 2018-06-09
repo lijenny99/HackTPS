@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet, Image} from 'react-native';
 import ResponseButtons from './ResponseButtons';
+<<<<<<< Updated upstream
 import call from 'react-native-phone-call';
 
 class Animal extends React.Component {
@@ -34,6 +35,28 @@ class Animal extends React.Component {
     }
 } 
 
+=======
+import BackButton from './BackButton';
+
+const Animal = (props) => (
+    <View style={styles.container}>
+    <BackButton goBack={props.goBack}/>
+    <View style={styles.container}>
+        <View style={styles.img}>
+            <Image source={require('../assets/DidYouKnow.png')} style={{width: 130, height: 100}} />
+        </View>
+        <Text style={styles.smallText}>
+        The City of Toronto inspects and investigates animal-related complaints to ensure compliance with acts, bylaws and regulations.
+        This is done through the Animal Control program.
+        </Text>
+        <TouchableHighlight style={styles.button3} onPress={() => this.props.navigation.navigate('FileComplaint')} >
+          <Text style={{color: 'white', textAlign: 'center', width: 200, marginTop: '5%'}}>Call 416-338-PAWS</Text>
+        </TouchableHighlight>
+        <ResponseButtons goBack={props.goBack}/>
+    </View>
+    </View>
+)
+>>>>>>> Stashed changes
 const styles = StyleSheet.create({
     h1: {
         fontSize: 20,
