@@ -12,7 +12,7 @@ export default class Messaging extends React.Component {
         client: '',
         session: '',
         message: '',
-        messages: [{text: 'hello', id: 12412512}, {text: 'hello', id: 12125125125125}, {text: 'hello', id: 124125121212412}]
+        messages: []
     }
 
 
@@ -26,8 +26,6 @@ export default class Messaging extends React.Component {
         const user1 = this.props.navigation.getParam('user', 'NONE');
         const client1 = this.props.navigation.getParam('client', 'NONE');
         const session1 = this.props.navigation.getParam('session', 'NONE');
-
-        console.log(user1, client1, session1)
 
         this.setState({
             user: user1,
