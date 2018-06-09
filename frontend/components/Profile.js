@@ -6,6 +6,8 @@ import Party from './Party';
 import Icon from './Icon';
 import Animal from './Animal';
 
+const socket = openSocket('https://bravetheheat.herokuapp.com/');
+
 export default class Profile extends React.Component {
     state = {
         page: '',
@@ -15,6 +17,7 @@ export default class Profile extends React.Component {
     }
 
     componentDidMount() {
+        
         const userID = this.props.navigation.getParam('userID', '');
         const clientID = this.props.navigation.getParam('clientID', '');
         this.setState({userID: userID, clientID: clientID});
@@ -28,15 +31,14 @@ export default class Profile extends React.Component {
 
     handleContact = () => {
         console.log('handling contact...');
-        const socket = openSocket('https://bravetheheat.herokuapp.com/');
+        socket.on("session_created", (data) => {
+            console.log(data);
+        });
         socket.emit("create_session", {
             user_id: this.state.userID,
-            client_id: this.state.clientID,
+            client_id: socket.id,
             category: ''
         });
-        socket.on("session_created", (data) => {
-        console.log(data);
-    });
     }
 
     handleParty = () => {
