@@ -9,7 +9,7 @@ const cors = require("cors");
 
 const router = express.Router();
 
-const mongo_url = "mongodb://hacktps:hacktps1@ds239940.mlab.com:39940/hacktps";
+const mongo_url = "mongodb://hacktpstest:hacktps@ds239940.mlab.com:39940/hacktps";
 
 const User = require("./schema.js");
 
