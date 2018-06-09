@@ -18,7 +18,8 @@ class HomeScreen extends React.Component {
     username: '',
     password: '',
     redirect: '',
-    errorMessage: ''
+    errorMessage: '',
+    userID: '',
   }
 
   handleUsername = (e) => {
@@ -38,6 +39,7 @@ class HomeScreen extends React.Component {
     auth.signInWithEmailAndPassword(this.state.username, this.state.password)
         .then(() => {
             console.log(`Authenticated!`);
+
         })
         .catch((err) => {
             console.log(err);
@@ -45,7 +47,7 @@ class HomeScreen extends React.Component {
     
       auth.onAuthStateChanged((user) => {
           if (user) {
-              this.setState({errorMessage: user.email});
+              this.setState({userID: user.email });
               this.props.navigation.navigate('Profile');
           } else {
               this.setState({errorMessage: 'failed to authenticate'})
