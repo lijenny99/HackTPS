@@ -15,6 +15,19 @@ export default class Messaging extends React.Component {
         messages: []
     }
 
+    componentDidMount() {
+        socket.on("message", (data) => {
+            /*
+            data = {
+                 client_id: client_id, //Sender
+                 session_id: session_id,
+                 time_stamp: time_stamp,
+                 user_id: data.user_id, //Sender
+                 message: data.message
+             }*/
+            this.setState({messages: [...this.state.messages, data.message]});
+        })
+    }
 
     static navigationOptions = {
         title: 'Chat',
