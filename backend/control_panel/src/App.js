@@ -77,8 +77,10 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.send_message(this.state.message);
-    this.setState({ 'message': "" })
+    if (this.state.message && this.state.message !== "") {
+      this.send_message(this.state.message);
+      this.setState({ 'message': "" })
+    }
   }
 
   handleChange(event) {
@@ -107,23 +109,22 @@ class App extends Component {
           </Grid>
           <Grid item xs={4} />
         </Grid>
-        {this.state.messages && Object.keys(this.state.messages).map(id => {
-          console.log(id);
-          return (
-            <Grid container spacing={24}>
-              <Grid item xs={2} />
-              <Grid item xs={8}>
-                <Paper style={{ padding: 10, width: 400, margin: "600" }}>
+        <Grid container spacing={24}>
+          {this.state.messages && Object.keys(this.state.messages).map(id => {
+            console.log(id);
+            return (
+              <Grid item xs={12}>
+                <Paper style={{ padding: 10, width: 480, margin: "auto" }}>
                   <Typography component="p">
                     {this.state.messages[id]}
                   </Typography>
 
                 </Paper>
               </Grid>
-            </Grid>
-          )
+            )
 
-        })}
+          })}
+        </Grid>
         <TextFields></TextFields>
       </div>
     );

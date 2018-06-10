@@ -68,7 +68,7 @@ class TextFields extends React.Component {
                                 />
                                 <TextField
                                     id="phone"
-                                    label="phone"
+                                    label="Phone"
                                     className={classes.textField}
                                     value={this.state.phone}
                                     onChange={this.handleChange('phone')}
@@ -77,7 +77,7 @@ class TextFields extends React.Component {
                                 />
                                 <TextField
                                     id="address"
-                                    label="address"
+                                    label="Address"
                                     className={classes.textField}
                                     value={this.state.address}
                                     onChange={this.handleChange('address')}
@@ -86,7 +86,7 @@ class TextFields extends React.Component {
                                 />
                                 <TextField
                                     id="report"
-                                    label="report"
+                                    label="Report"
                                     className={classes.textField}
                                     value={this.state.report}
                                     onChange={this.handleChange('report')}
