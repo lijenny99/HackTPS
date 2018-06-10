@@ -5,7 +5,7 @@ import BackButton from './BackButton';
 
 export default class Party extends React.Component {
     state = {
-        pastEleven: true
+        pastEleven: false
     }
 
     componentDidMount () {
