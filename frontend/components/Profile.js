@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TouchableHighlight, StyleSheet, Image, TextInput, KeyboardAvoidingView} from 'react-native';
+import {Text, View, TouchableHighlight, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import openSocket from 'socket.io-client';
 import Sketch from './Sketch';
 import Party from './Party';
@@ -20,7 +20,7 @@ export default class Profile extends React.Component {
     componentDidMount() {
         const userID = this.props.navigation.getParam('userID', 'NONE');
         const clientID = this.props.navigation.getParam('clientID', 'NONE');
-        
+
         this.setState({userID: userID, clientID: clientID});
     }
 
@@ -78,7 +78,7 @@ export default class Profile extends React.Component {
                             <Icon source={require('../assets/suspicious.png')} style={styles.img} title="Suspicious" />
                         </TouchableHighlight>
                     </View>
-                    <View style={{flex: 1, flexDirection: 'row', marginTop: '10%'}}>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
                         <TouchableHighlight onPress={this.handleParty} style={styles.homeAction}>
                             <Icon source={require('../assets/homeless.png')} style={styles.img} title="Homeless" />
                         </TouchableHighlight>
@@ -86,18 +86,12 @@ export default class Profile extends React.Component {
                             <Icon source={require('../assets/animals.png')} style={styles.img} title="Animals" />
                         </TouchableHighlight>
                     </View>
-                    <View style={{flex: 1, flexDirection: 'row', marginTop: '10%'}}>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
                         <TouchableHighlight onPress={this.handleParty} style={styles.homeAction}>
                             <Icon source={require('../assets/homealarm.png')} style={styles.img} title="Home Alarm" />
                         </TouchableHighlight>
                         <TouchableHighlight style={styles.homeAction} onPress={this.handleSketch}>
                             <Icon source={require('../assets/other.png')} style={styles.img} title="Other" />
-                        </TouchableHighlight>
-                    </View>
-                    <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
-                        <TextInput style={styles.input} onChange={this.handleTyping}/>
-                        <TouchableHighlight style={styles.button} onPress={this.handleSearch}>
-                            <Text style={{color: 'white', padding: 10, paddingLeft: 20, paddingRight: 20}}>Search</Text>
                         </TouchableHighlight>
                     </View>
                 </KeyboardAvoidingView>
@@ -123,12 +117,13 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      paddingTop: '10%'
+      paddingTop: '10%',
+      justifyContent: 'center'
     },
     homeAction: {
       width: 150,
-      height: 150,
-      marginLeft: 20,
+      height: 180,
+      marginLeft: 25,
       alignItems: 'center',
       justifyContent: 'center',
       shadowOffset: {width: 0, height: 5},
