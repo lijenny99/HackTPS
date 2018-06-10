@@ -70,7 +70,7 @@ export default class Messaging extends React.Component {
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} />
                     <TouchableHighlight style={styles.button} onPress={this.handleSend}>
-                        <Text style={{color: 'white', padding: 10, paddingLeft: 20, paddingRight: 20}}>Search</Text>
+                        <Text style={{color: 'white', padding: 10, paddingLeft: 20, paddingRight: 20}}>Send</Text>
                     </TouchableHighlight>
                 </View>
                 </View>
