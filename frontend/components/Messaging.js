@@ -3,6 +3,8 @@ import {TouchableHighlight, View, Text, StyleSheet, KeyboardAvoidingView, Image,
 import Message from './Message';
 import AutomatedMsg from './AutomatedMsg';
 import openSocket from 'socket.io-client';
+import CallButton from './CallButton';
+import call from 'react-native-phone-call';
 
 const socket = openSocket('https://bravetheheat.herokuapp.com/');
 
@@ -13,6 +15,16 @@ export default class Messaging extends React.Component {
         session: '',
         message: '',
         messages: []
+    }
+
+    call () {
+        const args = {
+            number: '6479747366',
+            prompt: false
+          }
+
+        call(args).catch(console.error)
+
     }
 
     componentDidMount() {
@@ -70,8 +82,12 @@ export default class Messaging extends React.Component {
             <KeyboardAvoidingView style={styles.container} source={require('../assets/background-white.jpg')}>
 
             <TouchableHighlight onPress={this.handleBack}>
-                <Image style={styles.img} source={require('../assets/back-arrow.png')} style={styles.img}/>
+                <Image style={styles.img} source={require('../assets/close-button.png')} style={styles.img}/>
             </TouchableHighlight>
+
+            <View style={styles.call}>
+            <CallButton onPress={this.call}/>
+            </View>
 
             <ScrollView>
             <View><AutomatedMsg/></View>
@@ -122,9 +138,14 @@ const styles = StyleSheet.create({
     img: {
         position:'absolute',
         alignSelf:'flex-end',
-        height: 25,
+        height: 20,
         resizeMode: 'contain',
         paddingRight: 300,
-        top: 30,
-      }
+        top: 50,
+      },
+    call: {
+        marginTop: 40,
+        alignSelf: 'flex-end',
+        marginRight: 30
+    }
 })
