@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, Picker, ScrollView, DatePickerIOS } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, ScrollView, DatePickerIOS } from 'react-native';
 
 export default class FileComplaint extends React.Component {
     static navigationOptions = {
@@ -27,13 +27,9 @@ export default class FileComplaint extends React.Component {
                 <DatePickerIOS date={this.state.chosenDate} onDateChange={this.setDate} />
                 </View>
                 <Text>Event Location: </Text>
+                <TextInput style={styles.input} onChange={this.handleText} />
                 <Text>Event Category: </Text>
-                <Picker>
-                  <Picker.Item label="loud" value="Loud Noise"/>
-                  <Picker.Item label="suspicious" value="Suspicious Activity"/>
-                  <Picker.Item label="animal" value="Wild Animal"/>
-
-                </Picker>
+                <TextInput style={styles.input} onChange={this.handleText} />
                 <Text>Event Duration: </Text>
                 <TextInput style={styles.input} onChange={this.handleText} />
                 <Text>Event Details: </Text>
@@ -60,6 +56,7 @@ const styles = StyleSheet.create({
     },
 
       input: {
+        marginTop: '2%',
         width: 300,
         padding: 10,
         borderWidth: 0.5,
