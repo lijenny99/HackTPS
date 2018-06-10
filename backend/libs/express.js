@@ -24,6 +24,20 @@ app.get("/", (req, res) => {
 
 });
 
+app.post("/form", (req, res) => {
+
+
+    res.send({
+        statusCode: 200,
+        body: "Form Received",
+    })
+
+    //debug
+
+    console.log(req);
+}
+);
+
 
 
 module.exports = socket;
