@@ -1,17 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, Picker, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, Picker, ScrollView, DatePickerIOS } from 'react-native';
 
 export default class FileComplaint extends React.Component {
     static navigationOptions = {
         title: 'File A Complaint'
     }
 
+   constructor(props) {
+      super(props);
+      this.state = { chosenDate: new Date()};
+      this.setDate = this.setDate.bind(this);
+    }
+
+    setDate(newDate) {
+      this.setState({chosenDate: newDate})
+    }
+
     render() {
         return (
+          <View styles={styles.container}>
             <ScrollView>
                 <Text>Name: </Text>
                 <TextInput style={styles.input} onChange={this.handleText} />
                 <Text>Date/Time Filed: </Text>
+                <View>
+                <DatePickerIOS date={this.state.chosenDate} onDateChange={this.setDate} />
+                </View>
                 <Text>Event Location: </Text>
                 <Text>Event Category: </Text>
                 <Picker>
@@ -30,15 +44,20 @@ export default class FileComplaint extends React.Component {
                 <Text>Impact on individuals/others: </Text>
                 <TextInput style={styles.inputlong} onChange={this.handleText} />
 
-
-
             </ScrollView>
-
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+
+  container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
 
       input: {
         width: 300,
