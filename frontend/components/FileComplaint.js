@@ -33,12 +33,12 @@ export default class FileComplaint extends React.Component {
                 <Text>Event Duration: </Text>
                 <TextInput style={styles.input} onChange={this.handleText} />
                 <Text>Event Details: </Text>
-                <TextInput style={styles.inputlong} onChange={this.handleText} />
+                <TextInput style={styles.inputlong} onChange={this.handleText} multiline={true}/>
 
                 <Text>Actions Taken: </Text>
-                <TextInput style={styles.inputlong} onChange={this.handleText} />
+                <TextInput style={styles.inputlong} onChange={this.handleText} multiline={true}/>
                 <Text>Impact on individuals/others: </Text>
-                <TextInput style={styles.inputlong} onChange={this.handleText} />
+                <TextInput style={styles.inputlong} onChange={this.handleText} multiline={true}/>
 
                 <View>
                     <TouchableHighlight style={styles.doneButton} >
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         width: 300,
         height: 200,
-        padding: 10,
+        textAlignVertical: 'top',
         borderWidth: 0.5,
         borderColor: 'grey',
         marginBottom: '5%',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         marginTop: '2%'
       },
       doneButton: {
-        width: 170,
+        width: 300,
         height: 50,
         backgroundColor: '#023d75',
         alignItems: 'center',
