@@ -56,12 +56,16 @@ export default class Messaging extends React.Component {
         return (
             <KeyboardAvoidingView style={styles.container} source={require('../assets/background-white.jpg')}>
 
+            <TouchableHighlight onPress={this.handleBack}>
+                <Image style={styles.img} source={require('../assets/back-arrow.png')} style={styles.img}/>
+            </TouchableHighlight>
+
             <ScrollView>
             <View><AutomatedMsg/></View>
 
             <View style={styles.container}>
                 {this.state.messages.map(message => {
-                   return message.sender === 'operator' ?  <GreyBox text={message.text} key={message.id} /> : <Message text={message.text} key={message.id}/> 
+                   return message.sender === 'operator' ?  <GreyBox text={message.text} key={message.id} /> : <Message text={message.text} key={message.id}/>
                 })}
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} />
@@ -71,11 +75,9 @@ export default class Messaging extends React.Component {
                 </View>
                 </View>
 
-                <TouchableHighlight onPress={this.handleBack} >
-                    <Image style={styles.img} source={require('../assets/back-arrow.png')} style={{resizeMode: 'contain', alignSelf:'flex-end', width: 100}}/>
-                </TouchableHighlight>
 
-                
+
+
                 </ScrollView>
             </KeyboardAvoidingView>
         )
@@ -103,5 +105,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#023d75',
         marginLeft: 20,
         alignItems: 'center'
-    }
+    },
+    img: {
+        position:'absolute',
+        alignSelf:'flex-end',
+        height: 25,
+        resizeMode: 'contain',
+        paddingRight: 300,
+        top: 30,
+      }
 })
