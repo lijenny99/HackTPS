@@ -71,7 +71,7 @@ function addMessage(obj) {
     message: obj.message
   }
   console.log("message")
-  firebase.database().ref('messages/' + String(obj.session_id) + "/" + String(obj.time_stamp)).set(message, errCallback)
+  firebase.database().ref('messages/' + String(obj.time_stamp)).set(message, errCallback)
 }
 //READ information
 //find out members in a chat, returns user_ids via a promise
@@ -85,28 +85,6 @@ function getMembers(session_id) {
       })
   }
 }
-const testObj = {
-  client_id: "clientid",
-  user_id: "user_id",
-  time_stamp: "time_stamp",
-  session_id: "sessionid",
-  category: "party"
-}
-let message1 = {
-  client_id: 1234,
-  session_id: 1,
-  time_stamp: 12345632435,
-  user_id: 1231,
-  message: "testing?"
-}
-let message2 = {
-  client_id: 12345,
-  session_id: 1,
-  time_stamp: 12345632436,
-  user_id: 1231,
-  message: "testing"
-}
-addMessage(message1)
 module.exports = {
   addMessage: addMessage,
   newSession: newSession,

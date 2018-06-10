@@ -99,7 +99,7 @@ io.on("connect", socket => {
         console.log(data);
         // Put info in database
 
-        //db.addMessage(message);
+        db.addMessage(message);
 
 
     })
