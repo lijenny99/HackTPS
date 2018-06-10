@@ -9,6 +9,8 @@ import openSocket from 'socket.io-client';
 import Messaging from './components/Messaging';
 
 
+const socket = openSocket('https://bravetheheat.herokuapp.com/');
+
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Login',
@@ -26,7 +28,6 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    const socket = openSocket('https://bravetheheat.herokuapp.com/');
     socket.on("connect", () => {
       this.setState({clientID: socket.id})
   })
@@ -66,8 +67,8 @@ class HomeScreen extends React.Component {
               this.setState({errorMessage: 'failed to authenticate'})
           }
       })
-    
   }
+
 
   render() {
     return (
@@ -87,7 +88,7 @@ class HomeScreen extends React.Component {
 
 export default createStackNavigator({
   Home: { screen: HomeScreen },
-  Profile: {screen: Profile},
+  Profile: {screen: Profile },
   FileComplaint: {screen: FileComplaint},
   Messaging: { screen: Messaging }
 });

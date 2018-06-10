@@ -16,9 +16,8 @@ const styles = StyleSheet.create({
       textAlign: 'left'
 
     },
-
     rectangle: {
-      marginLeft: 40,
+      marginRight: 90,
       width: 200,
       backgroundColor: '#F2F2F2',
       padding: 15,

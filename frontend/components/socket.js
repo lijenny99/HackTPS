@@ -1,56 +1,18 @@
 import openSocket from 'socket.io-client';
 const socket;
 
-function socket_connect(user, cb) {
-    /*
-    User layout:
-    {
-        user_id: String,
-    }
-    */
-    socket = openSocket('https://bravetheheat.herokuapp.com/api')
+socket = openSocket('https://bravetheheat.herokuapp.com/api')
 
-    socket.on("connection", () => {
+socket.on("connection", () => {
         let response = {
             status: "connected",
             client_id: socket.id,
         }
         cb(response);
-    });
-}
+});
 
-function socket_create_session(user, cb) {
-    /*
-    User layout:
-    {
-        user_id: String,
-        client_id: String,
-        category: String
-    }
-    */
-    socket.emit("create_session", user);
-    socket.on("session_created", (data) => {
-        /* data layout:{
-            status: true,
-            client_id: client_id,
-            user_id: data._id,
-            time_stamp: time_stamp,
-            session_id: session_id
-        }*/
-        cb(data);
-    });
-}
 
 function socket_send_message(user, message) {
-    /*
-    User layout:
-    {
-        user_id: String,
-        client_id: String,
-        category: String,
-        session_id: String
-    }
-    */
     let data = {
         user_id: user.user_id,
         client_id: user.client_id,
@@ -62,15 +24,6 @@ function socket_send_message(user, message) {
 }
 
 function socket_listener(user, cb) {
-    /*
-    User layout:
-    {
-        user_id: String,
-        client_id: String,
-        category: String,
-        session_id: String
-    }
-    */
     socket.on("message", (data) => {
         /*
         data = {

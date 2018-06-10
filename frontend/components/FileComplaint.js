@@ -9,7 +9,7 @@ export default class FileComplaint extends React.Component {
     render() {
         return (
             <View>
-                <Text>This is the file complaint page!</Text>
+                <Text>File A Report</Text>
             </View>
         )
     }

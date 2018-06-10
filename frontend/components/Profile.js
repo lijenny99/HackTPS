@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet, KeyboardAvoidingView} from 'react-native';
-import openSocket from 'socket.io-client';
 import Sketch from './Sketch';
 import Party from './Party';
 import Icon from './Icon';
 import Animal from './Animal';
+import openSocket from 'socket.io-client';
 
 const socket = openSocket('https://bravetheheat.herokuapp.com/');
 
@@ -14,7 +14,6 @@ export default class Profile extends React.Component {
         query: '',
         userID: '',
         clientID: '',
-        sessionID: ''
     }
 
     componentDidMount() {
@@ -31,15 +30,7 @@ export default class Profile extends React.Component {
     };
 
     handleContact = () => {
-        socket.on("session_created", (data) => {
-            this.setState({sessionID: data.session_id});
-        });
-        socket.emit("create_session", {
-            user_id: this.state.userID,
-            client_id: socket.id,
-            category: ''
-        });
-        this.props.navigation.navigate('Messaging', {user: this.state.userID, client: this.state.clientID, session: this.state.sessionID});
+        this.props.navigation.navigate('Messaging', {user: this.state.userID, client: this.state.clientID});
     }
 
     handleParty = () => {

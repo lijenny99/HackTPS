@@ -3,6 +3,9 @@ import {TouchableHighlight, View, Text, StyleSheet, KeyboardAvoidingView, Image,
 import Message from './Message';
 import AutomatedMsg from './AutomatedMsg';
 import openSocket from 'socket.io-client';
+import GreyBox from './GreyBox';
+import CallButton from './CallButton';
+import call from 'react-native-phone-call';
 
 const socket = openSocket('https://bravetheheat.herokuapp.com/');
 
@@ -10,21 +13,24 @@ export default class Messaging extends React.Component {
     state = {
         user: '',
         client: '',
-        session: '',
         message: '',
-        messages: []
+        messages: [],
+    }
+
+    call() {
+        const args = {
+            number: '6479747366',
+            prompt: false
+          }
+ 
+        call(args).catch(console.error)
+ 
     }
 
     componentDidMount() {
+
         socket.on("message", (data) => {
-            /*
-            data = {
-                 client_id: client_id, //Sender
-                 session_id: session_id,
-                 time_stamp: time_stamp,
-                 user_id: data.user_id, //Sender
-                 message: data.message
-             }*/
+            console.log(data.message);
             this.setState({messages: [...this.state.messages, data.message]});
         })
     }
@@ -38,12 +44,10 @@ export default class Messaging extends React.Component {
     handleText = (e) => {
         const user1 = this.props.navigation.getParam('user', 'NONE');
         const client1 = this.props.navigation.getParam('client', 'NONE');
-        const session1 = this.props.navigation.getParam('session', 'NONE');
 
         this.setState({
             user: user1,
             client: client1,
-            session: session1,
             message: {text: e.nativeEvent.text, id: new Date().getSeconds().toString(), sender: 'user'}
         })
     }
@@ -56,7 +60,6 @@ export default class Messaging extends React.Component {
         let data = {
             user_id: this.state.user,
             client_id: this.state.client,
-            session_id: this.state.session,
             message: this.state.message
         }
 
@@ -67,11 +70,15 @@ export default class Messaging extends React.Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.container} source={require('../assets/background-white.jpg')}>
+            <KeyboardAvoidingView style={styles.container} source={require('../assets/background-white.jpg')} behavior="padding">
 
             <TouchableHighlight onPress={this.handleBack}>
-                <Image style={styles.img} source={require('../assets/back-arrow.png')} style={styles.img}/>
+                <Image style={styles.img} source={require('../assets/close-button.png')} style={styles.img}/>
             </TouchableHighlight>
+
+            <View style={styles.call}>
+                <CallButton call={this.call}/>
+           </View>
 
             <ScrollView>
             <View><AutomatedMsg/></View>
@@ -87,10 +94,6 @@ export default class Messaging extends React.Component {
                     </TouchableHighlight>
                 </View>
                 </View>
-
-
-
-
                 </ScrollView>
             </KeyboardAvoidingView>
         )
@@ -125,6 +128,11 @@ const styles = StyleSheet.create({
         height: 25,
         resizeMode: 'contain',
         paddingRight: 300,
-        top: 30,
-      }
+        top: 50,
+      },
+    call: {
+        marginTop: 40,
+        alignSelf: 'flex-end',
+        marginRight: 30
+    }
 })
