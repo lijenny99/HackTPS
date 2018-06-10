@@ -27,6 +27,16 @@ export default class Messaging extends React.Component {
  
     }
 
+    call () {
+        const args = {
+            number: '6479747366',
+            prompt: false
+          }
+
+        call(args).catch(console.error)
+
+    }
+
     componentDidMount() {
 
         socket.on("message", (data) => {
@@ -125,7 +135,7 @@ const styles = StyleSheet.create({
     img: {
         position:'absolute',
         alignSelf:'flex-end',
-        height: 25,
+        height: 20,
         resizeMode: 'contain',
         paddingRight: 300,
         top: 50,
