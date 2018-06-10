@@ -4,6 +4,10 @@ let local_cache = {}; // For sessions
 const io = require("./express");
 const db = require('./database.js');
 
+let active_sessions = {
+
+};
+
 
 io.on("connect", socket => {
     let client_id = socket.id;
@@ -36,6 +40,8 @@ io.on("connect", socket => {
                 session_id: session_id,
                 category: data.category
             }
+
+            active_sessions[session_id] = socket.id;
             //db.createSession(info);
         })
 
@@ -71,7 +77,7 @@ io.on("connect", socket => {
         socket.join(session_id, () => {
             socket.to(client_id).emit("message", info);
             socket.broadcast.to(session_id).emit("message", message);
-            console.log(`${client_id} join ${session_id}`);
+            console.log(`${client_id} joined ${session_id}`);
         }
         )
     });
@@ -79,17 +85,18 @@ io.on("connect", socket => {
 
     socket.on("message", (data) => {
         let time_stamp = Date.now();
-        let session_id = data.session_id;
+        //let session_id = data.session_id;
         let message = {
             client_id: client_id,
-            session_id: session_id,
+            //session_id: session_id,
             time_stamp: time_stamp,
             user_id: data.user_id,
             message: data.message
         }
         // Maybe get info from database regarding user?
 
-        socket.broadcast.to(session_id, message);
+        socket.broadcast.emit("message", message);
+        console.log(data);
         // Put info in database
 
         //db.addMessage(message);
@@ -102,6 +109,12 @@ io.on("connect", socket => {
     })
 
     socket.on("disconnect", () => console.log(`${client_id} disconnected`));
+
+    socket.on("get_rooms", (id) => {
+        console.log(`${id} requested open sessions`);
+        console.log(active_sessions);
+        socket.emit("open_sessions", active_sessions);
+    });
 });
 
 function gen_session() {
