@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography"
 import openSocket from "socket.io-client";
 
 const styles = theme => ({
@@ -13,8 +15,7 @@ const styles = theme => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
+    padding: '20px',
     color: theme.palette.text.secondary,
   },
 });
@@ -54,9 +55,6 @@ class App extends Component {
 
   }
 
-
-
-
   send_message(message, cb) {
 
     let data = {
@@ -79,6 +77,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.send_message(this.state.message);
+    this.setState({'message': ""})
   }
 
   handleChange(event) {
@@ -90,8 +89,8 @@ class App extends Component {
     return (
       <div className={styles.root}>
         <Grid container spacing={24}>
-          <Grid item xs={2} />
-          <Grid item xs={8}>
+          <Grid item xs={4} />
+          <Grid item xs={16}>
             <form className="messageForm" onSubmit={this.handleSubmit}>
               <TextField
                 id="message__"
@@ -105,25 +104,28 @@ class App extends Component {
               </Button>
             </form>
           </Grid>
-          <Grid item xs={2} />
+          <Grid item xs={4} />
+        </Grid>
           {this.state.messages && Object.keys(this.state.messages).map(id => {
             console.log(id);
             return (
+              <Grid container spacing={24}>
+              <Grid item xs={2} />
               <Grid item xs={8}>
-                {this.state.messages[id]}
+                <Paper style={{padding: 10}}>
+                  <Typography component="p">
+                  {this.state.messages[id]}
+                </Typography>
+
+                </Paper>
               </Grid>
+            </Grid>
             )
+
           })}
-
-
-        </Grid>
-
-
-
-
       </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
