@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, Image} from 'react-native';
 const GreyBox = (props) => (
     <View style={styles.rectangle}>
         <Text style={styles.txt}>
-        TestTestTestTestTestTestTestTestTestTestTestTestTest
+        {props.text}
         </Text>
     </View>
 )

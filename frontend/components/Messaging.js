@@ -31,7 +31,7 @@ export default class Messaging extends React.Component {
             user: user1,
             client: client1,
             session: session1,
-            message: {text: e.nativeEvent.text, id: new Date().getSeconds().toString()}
+            message: {text: e.nativeEvent.text, id: new Date().getSeconds().toString(), sender: 'user'}
         })
     }
 
@@ -61,7 +61,7 @@ export default class Messaging extends React.Component {
 
             <View style={styles.container}>
                 {this.state.messages.map(message => {
-                    return <Message text={message.text} key={message.id}/>
+                   return message.sender === 'operator' ?  <GreyBox text={message.text} key={message.id} /> : <Message text={message.text} key={message.id}/> 
                 })}
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
                     <TextInput style={styles.input} onChange={this.handleText} />
