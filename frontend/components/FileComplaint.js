@@ -19,7 +19,7 @@ export default class FileComplaint extends React.Component {
     render() {
         return (
           <View styles={styles.container}>
-            <ScrollView>
+            <ScrollView style={{marginLeft: 35, marginTop: 50, marginBottom: 50}} >
                 <Text>Name: </Text>
                 <TextInput style={styles.input} onChange={this.handleText} />
                 <Text>Date/Time Filed: </Text>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'center'
     },
 
       input: {
