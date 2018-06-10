@@ -40,6 +40,12 @@ export default class FileComplaint extends React.Component {
                 <Text>Impact on individuals/others: </Text>
                 <TextInput style={styles.inputlong} onChange={this.handleText} />
 
+                <View>
+                    <TouchableHighlight style={styles.doneButton} >
+                        <Text style={styles.text}>Submit</Text>
+                    </TouchableHighlight>
+                </View>
+
             </ScrollView>
             </View>
         )
@@ -74,7 +80,18 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'grey',
         marginBottom: '5%',
-        backgroundColor: '#fcfdff'
+        backgroundColor: '#fcfdff',
+        marginTop: '2%'
       },
+      doneButton: {
+        width: 170,
+        height: 50,
+        backgroundColor: '#023d75',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 
+    text: {
+        color: 'white'
+    }
 })
