@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         width: 300,
         height: 200,
+        padding: 10,
         textAlignVertical: 'top',
         borderWidth: 0.5,
         borderColor: 'grey',
