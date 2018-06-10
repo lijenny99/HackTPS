@@ -9,6 +9,7 @@ const server = require("http").createServer(app);
 const crypto = require("crypto");
 const io = require('socket.io');
 
+
 const socket = new io(server, {
 });
 
@@ -22,6 +23,20 @@ app.get("/", (req, res) => {
     res.send("Hello");
 
 });
+
+app.post("/form", (req, res) => {
+
+
+    res.send({
+        statusCode: 200,
+        body: "Form Received",
+    })
+
+    //debug
+
+    console.log(req);
+}
+);
 
 
 
