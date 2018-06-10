@@ -7,13 +7,13 @@ export default class FileComplaint extends React.Component {
         title: 'File A Report'
     }
 
-   constructor(props) {
-      super(props);
-      this.state = { chosenDate: new Date()};
-      this.setDate = this.setDate.bind(this);
-    }
+   
+    state = { 
+        chosenDate: new Date()
+    };
+    
 
-    setDate(newDate) {
+    setDate = (newDate) => {
       this.setState({chosenDate: newDate})
     }
 
