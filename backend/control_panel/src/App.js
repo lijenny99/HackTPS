@@ -109,24 +109,32 @@ class App extends Component {
           </Grid>
           <Grid item xs={4} />
         </Grid>
-        <Grid container spacing={24}>
-          {this.state.messages && Object.keys(this.state.messages).map(id => {
-            console.log(id);
-            return (
-              <Grid item xs={12}>
-                <Paper style={{ padding: 10, width: 480, margin: "auto" }}>
-                  <Typography component="p">
-                    {this.state.messages[id]}
-                  </Typography>
+        <Grid container spacing={24} justify="center" direction="flex-end" alignItems="flex-start">
+          <Grid item xs={8}>
+            <TextFields></TextFields>
+          </Grid>
+          <Grid item xs={3}>
+            <Grid container spacing={24} justify="flex-start" direction="column" alignItems="center">
 
-                </Paper>
-              </Grid>
-            )
+              {this.state.messages && Object.keys(this.state.messages).map(id => {
+                console.log(id);
+                return (
+                  <Grid item xs={12}>
+                    <Paper style={{ padding: 10, width: 200, margin: "auto" }}>
+                      <Typography component="p">
+                        {this.state.messages[id]}
+                      </Typography>
 
-          })}
+                    </Paper>
+                  </Grid>
+                )
+              })}
+            </Grid>
+            <Grid item xs={1}></Grid>
+          </Grid>
         </Grid>
-        <TextFields></TextFields>
-      </div>
+
+      </div >
     );
   }
 }
