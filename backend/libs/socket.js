@@ -13,7 +13,7 @@ io.on("connect", socket => {
     let client_id = socket.id;
     console.log(`New client connected with client ID ${client_id}`);
 
-    socket.on("create_session", (data) => {
+    /*socket.on("create_session", (data) => {
         let time_stamp = Date.now();
         session_id = gen_session();
         let info = {
@@ -82,7 +82,7 @@ io.on("connect", socket => {
         )
     });
 
-
+    */
     socket.on("message", (data) => {
         let time_stamp = Date.now();
         //let session_id = data.session_id;
@@ -104,17 +104,18 @@ io.on("connect", socket => {
 
     })
 
-    socket.on("leave_room", () => {
+    /*socket.on("leave_room", () => {
 
-    })
+    })*/
 
     socket.on("disconnect", () => console.log(`${client_id} disconnected`));
 
-    socket.on("get_rooms", (id) => {
+    /*socket.on("get_rooms", (id) => {
         console.log(`${id} requested open sessions`);
         console.log(active_sessions);
         socket.emit("open_sessions", active_sessions);
     });
+    */
 });
 
 function gen_session() {

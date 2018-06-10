@@ -27,8 +27,6 @@ class App extends Component {
       messages: {
 
       },
-      session: '',
-      sessions: {},
       message: null,
     };
     this.user = {
@@ -42,10 +40,6 @@ class App extends Component {
       this.user.client_id = this.socket.id;
 
     });
-    this.socket.on("open_sessions", (data) => {
-      this.setState({ sessions: data })
-      console.log(`Received open sessions ${JSON.stringify(data)}`);
-    })
     this.socket.on("message", (data) => {
       let messages = this.state.messages;
       let id = Date.now().toString();
@@ -56,32 +50,10 @@ class App extends Component {
     });
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSession = this.handleSession.bind(this);
-    this.sessionSubmit = this.sessionSubmit.bind(this);
-    this.join_rooms = this.join_rooms.bind(this);
-    this.set_session = this.set_session.bind(this);
 
-    this.query = this.query.bind(this);
+
   }
 
-  get_rooms() {
-
-    this.socket.emit("get_rooms", this.socket.id);
-    console.log(`Requested rooms`);
-  }
-
-  join_rooms() {
-    let data = {
-      client_id: this.user.client_id,
-      user_id: this.user.user_id,
-      session_id: this.state.session
-    };
-    this.user.session_id = this.state.session;
-
-
-    this.socket.emit("join_room", data);
-    console.log(`${this.state.session} joined`);
-  }
 
 
 
@@ -90,7 +62,6 @@ class App extends Component {
     let data = {
       client_id: this.user.client_id,
       user_id: this.user.user_id,
-      session_id: this.user.session_id,
       message: { text: message, id: Date.now().toString(), sender: "operator" }
     }
     this.socket.emit("message", data);
@@ -98,7 +69,7 @@ class App extends Component {
     let id = Date.now().toString();
     messages[id] = message;
     this.setState({ messages: messages });
-    console.log(`${message} sent to room ${this.user.session_id}`);
+    console.log(`${message} sent`);
   }
 
   componentDidMount() {
@@ -112,32 +83,6 @@ class App extends Component {
 
   handleChange(event) {
     this.setState({ message: event.target.value });
-  }
-
-  handleSession(event) {
-    this.setState({ session: event.target.value });
-  }
-
-  sessionSubmit(e) {
-    e.preventDefault();
-    this.join_rooms();
-
-  }
-
-  query() {
-
-    this.get_rooms();
-
-
-  }
-
-  list_sessions() {
-
-  }
-
-  set_session(session) {
-    this.setState({ session: session });
-    this.join_rooms();
   }
 
 
@@ -160,29 +105,7 @@ class App extends Component {
               </Button>
             </form>
           </Grid>
-          <Grid item xs={2}>
-            <Button
-              onClick={this.query}
-              color="primary"
-            >
-              Get sessions
-              </Button>
-          </Grid>
           <Grid item xs={2} />
-          <Grid item xs={10}>
-            <form className="messageForm" onSubmit={this.sessionSubmit}>
-              <TextField
-                id="session"
-                label="session"
-                value={this.state.session}
-                onChange={this.handleSession}
-                margin="normal"
-              />
-              <Button type="submit" value="Submit">
-                Join Session
-              </Button>
-            </form>
-          </Grid>
           {this.state.messages && Object.keys(this.state.messages).map(id => {
             console.log(id);
             return (
