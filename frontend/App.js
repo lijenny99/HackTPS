@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground } from 'react-native';
 import Profile from './components/Profile';
 import { createStackNavigator } from 'react-navigation';
 import FileComplaint from './components/FileComplaint';
@@ -64,7 +64,7 @@ class HomeScreen extends React.Component {
                 clientID: this.state.clientID
               });
           } else {
-              this.setState({errorMessage: 'failed to authenticate'})
+              this.setState({errorMessage: 'Failed to authenticate'})
           }
       })
   }
@@ -72,19 +72,17 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding">
-      {this.state.errorMessage !== '' ? <Text>{this.state.errorMessage}</Text> : ''}
-      <ImageBackground style={styles.container} source={require('./assets/background.jpg')}>
-        <Text style={styles.text}>Log In</Text>
-        <Text style={styles.label}>Enter Your Username</Text>
-        <TextInput style={styles.input} onChange={this.handleUsername}/>
-        <Text style={styles.label}>Enter Your Password</Text>
-        <TextInput style={styles.input} onChange={this.handlePassword} secureTextEntry={true}/>
-        <TouchableHighlight style={styles.button} onPress={this.handleSubmit}>
-          <Text style={{color: 'white'}}>Login</Text>
-        </TouchableHighlight>
-      </ImageBackground>
-      </KeyboardAvoidingView>
+        <ImageBackground style={styles.container} source={require('./assets/background.jpg')}>
+          <Text style={styles.text}>Log In</Text>
+          {this.state.errorMessage !== '' ? <Text style={styles.errorMessage}>{this.state.errorMessage}</Text> : <View></View>}
+          <Text style={styles.label}>Enter Your Username</Text>
+          <TextInput style={styles.input} onChange={this.handleUsername}/>
+          <Text style={styles.label}>Enter Your Password</Text>
+          <TextInput style={styles.input} onChange={this.handlePassword} secureTextEntry={true}/>
+          <TouchableHighlight style={styles.button} onPress={this.handleSubmit}>
+            <Text style={{color: 'white'}}>Login</Text>
+          </TouchableHighlight>
+        </ImageBackground>
     );
   }
 }
@@ -130,5 +128,9 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     backgroundColor: '#0192a8',
     borderRadius: 40
+  },
+  errorMessage: {
+    textAlign: 'center',
+    color: 'red'
   }
 });
