@@ -49,14 +49,6 @@ export default class Profile extends React.Component {
         this.setState({page: ''})
     }
 
-    handleTyping = (e) => {
-        this.setState({query: e.nativeEvent.text})
-    }
-
-    handleSearch = () => {
-        console.log(this.state.query);
-    }
-
     render() {
         if (this.state.page === '') {
             return (
