@@ -27,20 +27,9 @@ export default class Messaging extends React.Component {
  
     }
 
-    call () {
-        const args = {
-            number: '6479747366',
-            prompt: false
-          }
-
-        call(args).catch(console.error)
-
-    }
-
     componentDidMount() {
 
         socket.on("message", (data) => {
-            console.log(data.message);
             this.setState({messages: [...this.state.messages, data.message]});
         })
     }
